@@ -27,7 +27,7 @@ This project implements a voice-based form submission application using Python a
 
 1. **Clone this repository to your local machine:**
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/Heisenberg208/speech-to-text.git
    ```
 
 2. **Navigate to the project directory:**
