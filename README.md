@@ -44,7 +44,7 @@ This project implements a voice-based form submission application using Python a
 
 1. **Run the application:**
    ```bash
-   streamlit run <your_python_file.py>
+   streamlit run main.py
    ```
 
 2. **Open the provided local URL in your web browser.**
@@ -53,7 +53,7 @@ This project implements a voice-based form submission application using Python a
 
 ## CSS Styling
 
-The application uses a custom CSS file named `styles.css` for styling. This file controls the appearance of various components, including the form layout and buttons.
+The application uses a custom CSS file named `style.css` for styling. This file controls the appearance of various components, including the form layout and buttons.
 
 ### Custom CSS Highlights
 
