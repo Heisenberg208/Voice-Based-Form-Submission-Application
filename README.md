@@ -23,6 +23,12 @@ This project implements a voice-based form submission application using Python a
 - Python 3.x
 - Required packages can be installed using `pip`.
 
+
+### Additional Dependencies
+
+- **PyAudio:** For microphone access.
+
+
 ## Installation
 
 1. **Clone this repository to your local machine:**
@@ -37,7 +43,9 @@ This project implements a voice-based form submission application using Python a
 
 3. **Install the required packages:**
    ```bash
-   pip install streamlit SpeechRecognition googletrans==4.0.0-rc1
+   pip install streamlit SpeechRecognition pyaudio googletrans==4.0.0-rc1
+
+
    ```
 
 ## Usage
