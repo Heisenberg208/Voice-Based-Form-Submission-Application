@@ -23,11 +23,17 @@ This project implements a voice-based form submission application using Python a
 - Python 3.x
 - Required packages can be installed using `pip`.
 
+
+### Additional Dependencies
+
+- **PyAudio:** For microphone access.
+
+
 ## Installation
 
 1. **Clone this repository to your local machine:**
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/Heisenberg208/speech-to-text.git
    ```
 
 2. **Navigate to the project directory:**
@@ -37,14 +43,14 @@ This project implements a voice-based form submission application using Python a
 
 3. **Install the required packages:**
    ```bash
-   pip install streamlit SpeechRecognition googletrans==4.0.0-rc1 
+   pip install streamlit SpeechRecognition googletrans==4.0.0-rc1
    ```
 
 ## Usage
 
 1. **Run the application:**
    ```bash
-   streamlit run <your_python_file.py>
+   streamlit run main.py
    ```
 
 2. **Open the provided local URL in your web browser.**
@@ -53,7 +59,7 @@ This project implements a voice-based form submission application using Python a
 
 ## CSS Styling
 
-The application uses a custom CSS file named `styles.css` for styling. This file controls the appearance of various components, including the form layout and buttons.
+The application uses a custom CSS file named `style.css` for styling. This file controls the appearance of various components, including the form layout and buttons.
 
 ### Custom CSS Highlights
 
