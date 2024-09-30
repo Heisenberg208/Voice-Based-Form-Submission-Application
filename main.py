@@ -9,7 +9,7 @@ def recognize_speech():
         st.markdown('<div class="info-text">Listening...</div>', unsafe_allow_html=True)
         audio = recognizer.listen(source, timeout=None, phrase_time_limit=None)
         try:
-            text = recognizer.recognize_google(audio, language='en-IN')
+            text = recognizer.recognize_google(audio, language='hi-IN')
             return text
         except sr.UnknownValueError:
             st.markdown('<div class="error-message">Sorry, I could not understand the audio.</div>', unsafe_allow_html=True)
@@ -64,6 +64,7 @@ with col1:
         recognized_text = recognize_speech()
         if recognized_text:
             st.session_state['phone_number'] = recognized_text
+            st.rerun()
             
 
     st.markdown('<label class="black-label">Email</label>', unsafe_allow_html=True)
@@ -72,7 +73,8 @@ with col1:
         recognized_text = recognize_speech()
         if recognized_text:
             st.session_state['email'] = recognized_text
-           
+            st.rerun()
+            
 
     st.markdown('<label class="black-label">Tell Me About Yourself</label>', unsafe_allow_html=True)
     about_yourself = st.text_area("Tell Me About Yourself", value=st.session_state.get('tell_me_about_yourself', ""), height=100, placeholder="Share something about yourself", key="about_input", label_visibility="collapsed")
@@ -80,10 +82,11 @@ with col1:
         recognized_text = recognize_speech()
         if recognized_text:
             st.session_state['tell_me_about_yourself'] = recognized_text
+            st.rerun()
             
 
     languages = {
-        "Hindi": "hi",
+        "English": "en",
         "Kannada": "kn",
         "Tamil": "ta",
         "Telugu": "te",
