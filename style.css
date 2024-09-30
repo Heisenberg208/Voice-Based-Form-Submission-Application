@@ -1,6 +1,6 @@
-/* styles.css */
+
 .main {
-    background-color: #acaeb0;
+    background-color: #ffffff;
     padding: 20px;
     border-radius: 10px;
 }
@@ -40,7 +40,7 @@
 }
 
 .form-container {
-    background-color: white;
+    background-color: rgb(157, 153, 153);
     padding: 30px;
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -52,4 +52,21 @@
     font-weight: bold;
     margin-bottom: 5px;
     display: block;
+}
+.info-text {
+    color: black;
+    background-color: #E3F2FD;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    font-size: 16px;
+    font-weight: bold;
+}
+.error-message {
+    color: black;
+    background-color: #FFCCCB; /* Light red background */
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    font-size: 16px;
 }
