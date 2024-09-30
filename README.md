@@ -8,7 +8,7 @@ This project implements a voice-based form submission application using Python a
 
 - **Voice Recognition:** Users can record their responses using a microphone.
 - **Real-time Display:** Recognized text is displayed immediately in the respective fields.
-- **Translation:** Users can translate their response to the "Tell Me About Yourself" field into five main Indian languages: Kannada, Hindi, Tamil, Telugu, and Malayalam.
+- **Translation:** Users can translate their response to the "Tell Me About Yourself" field into four main Indian languages: Kannada, Tamil, Telugu, and Malayalam.
 - **Responsive Design:** The application is designed to be user-friendly and responsive.
 
 ## Technologies Used
