@@ -43,7 +43,7 @@ This project implements a voice-based form submission application using Python a
 
 3. **Install the required packages:**
    ```bash
-   pip install streamlit SpeechRecognition googletrans==4.0.0-rc1
+   pip install streamlit SpeechRecognition googletrans==4.0.0-rc1 pyaudio setuptools
    ```
 
 ## Usage
