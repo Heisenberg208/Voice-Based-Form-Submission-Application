@@ -56,7 +56,7 @@ with col1:
         recognized_text = recognize_speech()
         if recognized_text:
             st.session_state['name'] = recognized_text
-            st.experimental_rerun()
+            st.rerun()
 
     st.markdown('<label class="black-label">Phone Number</label>', unsafe_allow_html=True)
     phone_number = st.text_input("Phone Number", value=st.session_state.get('phone_number', ""), placeholder="Enter your phone number", key="phone_input", label_visibility="collapsed")
@@ -64,7 +64,7 @@ with col1:
         recognized_text = recognize_speech()
         if recognized_text:
             st.session_state['phone_number'] = recognized_text
-            st.experimental_rerun()
+            
 
     st.markdown('<label class="black-label">Email</label>', unsafe_allow_html=True)
     email = st.text_input("Email", value=st.session_state.get('email', ""), placeholder="Enter your email", key="email_input", label_visibility="collapsed")
@@ -72,7 +72,7 @@ with col1:
         recognized_text = recognize_speech()
         if recognized_text:
             st.session_state['email'] = recognized_text
-            st.experimental_rerun()
+           
 
     st.markdown('<label class="black-label">Tell Me About Yourself</label>', unsafe_allow_html=True)
     about_yourself = st.text_area("Tell Me About Yourself", value=st.session_state.get('tell_me_about_yourself', ""), height=100, placeholder="Share something about yourself", key="about_input", label_visibility="collapsed")
@@ -80,7 +80,7 @@ with col1:
         recognized_text = recognize_speech()
         if recognized_text:
             st.session_state['tell_me_about_yourself'] = recognized_text
-            st.experimental_rerun()
+            
 
     languages = {
         "Hindi": "hi",
