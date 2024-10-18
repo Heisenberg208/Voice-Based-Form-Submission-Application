@@ -44,7 +44,7 @@ def extract_info(text):
     # Patterns to match name, phone number, and email
     name_pattern = r"(?i)my name is (\w+)"
     phone_pattern = r"(?i)my phone (?:number|no) is ([\d\s]+)"
-    email_pattern = r"(?i)my email (?:address|id) is ([\w\.-]+@[a-zA-Z\d\.-]+\.[a-zA-Z]{2,})"
+    email_pattern = r"(?i)my email (?:address|id) is ([\w\.-]+.*)"
 
     # Search for name
     name = re.search(name_pattern, text)
@@ -60,12 +60,13 @@ def extract_info(text):
 
     # Search for email after phone to avoid overlap
     email = re.search(email_pattern, text)
+    email_value = email.group(1) if email is not None else ""
 
     # Return extracted information
     return {
         "name": name.group(1) if name is not None else "",
         "phone": phone_number,
-        "email": email.group(1) if email is not None else ""
+        "email": email_value  # Autofill even if incomplete
     }
 
 st.title("Voice-based Form Submission")
@@ -87,7 +88,7 @@ if st.button("Record Audio"):
         st.write(info)
         name = st.text_input("Name", value=info["name"])
         phone = st.text_input("Phone Number", value=info["phone"])
-        email = st.text_input("Email", value=info["email"])
+        email = st.text_input("Email", value=info["email"])  # Autofill incomplete email
         
         if st.button("Submit"):
             st.success("Form submitted successfully!")
