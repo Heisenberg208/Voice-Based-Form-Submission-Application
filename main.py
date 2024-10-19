@@ -44,7 +44,7 @@ def extract_info(text):
     # Patterns to match name, phone number, and email
     name_pattern = r"(?i)my name is (\w+)"
     phone_pattern = r"(?i)my phone (?:number|no) is ([\d\s]+)"
-    email_pattern = r"(?i)my email (?:address|id) is ([\w\.-]+.*)"
+    email_pattern = r"(?i)my email (?:address|id) is (.+)"  # Capture everything after 'my email is'
 
     # Search for name
     name = re.search(name_pattern, text)
@@ -60,13 +60,13 @@ def extract_info(text):
 
     # Search for email after phone to avoid overlap
     email = re.search(email_pattern, text)
-    email_value = email.group(1) if email is not None else ""
+    email_value = email.group(1).strip() if email is not None else ""  # Trim spaces
 
     # Return extracted information
     return {
         "name": name.group(1) if name is not None else "",
         "phone": phone_number,
-        "email": email_value  # Autofill even if incomplete
+        "email": email_value  # Autofill whatever is captured, valid or not
     }
 
 st.title("Voice-based Form Submission")
