@@ -7,7 +7,6 @@ import os
 import speech_recognition as sr
 import soundfile as sf
 
-# Initialize recognizer
 recognizer = sr.Recognizer()
 
 def record_audio(duration=10, sample_rate=16000):
@@ -22,9 +21,8 @@ def record_audio(duration=10, sample_rate=16000):
         return None
 
 def save_audio(audio, sample_rate=16000):
-    # Use NamedTemporaryFile so the file can be automatically cleaned up
-    temp_file = tempfile.NamedTemporaryFile(suffix=".wav", delete=False)  # `delete=False` ensures file is not deleted until we manually do it
-    sf.write(temp_file.name, audio, sample_rate)  # Use soundfile to save in the proper format
+    temp_file = tempfile.NamedTemporaryFile(suffix=".wav", delete=False)
+    sf.write(temp_file.name, audio, sample_rate)
     return temp_file.name
 
 def transcribe_audio(audio_path):
@@ -41,32 +39,26 @@ def transcribe_audio(audio_path):
         return ""
 
 def extract_info(text):
-    # Patterns to match name, phone number, and email
     name_pattern = r"(?i)my name is (\w+)"
     phone_pattern = r"(?i)my phone (?:number|no) is ([\d\s]+)"
-    email_pattern = r"(?i)my email (?:address|id) is (.+)"  # Capture everything after 'my email is'
+    email_pattern = r"(?i)my email (?:address|id) is (.+)"
 
-    # Search for name
     name = re.search(name_pattern, text)
 
-    # Search for phone number
     phone = re.search(phone_pattern, text)
     phone_number = phone.group(1) if phone is not None else ""
-    phone_number = re.sub(r"\s+", "", phone_number)  # Remove spaces from phone number
+    phone_number = re.sub(r"\s+", "", phone_number)
 
-    # Ensure valid phone number (must be exactly 10 digits)
     if not re.fullmatch(r"\d{10}", phone_number):
-        phone_number = ""  # Invalidate if not a valid 10-digit number
+        phone_number = ""
 
-    # Search for email after phone to avoid overlap
     email = re.search(email_pattern, text)
-    email_value = email.group(1).strip() if email is not None else ""  # Trim spaces
+    email_value = email.group(1).strip() if email is not None else ""
 
-    # Return extracted information
     return {
         "name": name.group(1) if name is not None else "",
         "phone": phone_number,
-        "email": email_value  # Autofill whatever is captured, valid or not
+        "email": email_value
     }
 
 st.title("Voice-based Form Submission")
@@ -76,7 +68,7 @@ if st.button("Record Audio"):
     if audio is not None:
         audio_path = save_audio(audio)
         
-        st.audio(audio_path)  # Play the audio
+        st.audio(audio_path)
         
         transcription = transcribe_audio(audio_path)
         st.write("Transcription:")
@@ -88,11 +80,10 @@ if st.button("Record Audio"):
         st.write(info)
         name = st.text_input("Name", value=info["name"])
         phone = st.text_input("Phone Number", value=info["phone"])
-        email = st.text_input("Email", value=info["email"])  # Autofill incomplete email
+        email = st.text_input("Email", value=info["email"])
         
         if st.button("Submit"):
             st.success("Form submitted successfully!")
         
-        # Cleanup: After form submission, clean up the temp file
         if os.path.exists(audio_path):
             os.remove(audio_path)
