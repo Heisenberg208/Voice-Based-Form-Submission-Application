@@ -1,6 +1,5 @@
 import streamlit as st
 import sounddevice as sd
-import numpy as np
 import re
 import tempfile
 import os
@@ -61,51 +60,75 @@ def extract_info(text):
     }
 
 # Set the title and intro
-st.title("Voice-based Form Submission")
-st.write("Record your voice to automatically fill in the form below.")
+st.title("🎙️ Voice-based Form Submission")
+st.write("Record your voice to automatically fill in the form below. 🎤")
+
+# Step 0: How to Use
+with st.expander("ℹ️ How to Use", expanded=True):
+    st.markdown("""
+    ### Step-by-Step Guide:
+    1. **Click** on "Start Recording" to record your voice.
+    2. **Speak clearly** and mention the following details in the correct format:
+       - "My name is [Your Name]."
+       - "My phone number is [Your 10-digit phone number]."
+       - "My email address is [Your email address]."
+    3. After recording, your audio will be transcribed and the details will be filled in automatically.
+    4. Review the form, edit if needed, and click on "Submit Form" to complete the submission.
+
+    ### Important Notes:
+    - Ensure you are in a **quiet environment** for better accuracy.
+    - Speak **slowly and clearly**.
+    - Your phone number should have **10 digits** without any special characters or spaces.
+    - The email address must be in a valid format (e.g., name@example.com).
+    """)
 
 # Initialize the info variable with default empty values
-info = {"name": "", "phone": "", "email": ""}
+info = st.session_state.get('info', {"name": "", "phone": "", "email": ""})
 
-# Organize layout using columns for recording and displaying the result
-col1, col2 = st.columns(2)
-
-# Column 1: Audio recording and transcription
-with col1:
-    st.subheader("Record Your Audio")
-    if st.button("Start Recording"):
-        audio = record_audio()
-        if audio is not None:
-            audio_path = save_audio(audio)
-            
-            st.audio(audio_path)
-            
-            transcription = transcribe_audio(audio_path)
-            st.subheader("Transcription:")
-            st.write(transcription)
-
-            info = extract_info(transcription)
-
-            # Delete temporary audio file after use
-            if os.path.exists(audio_path):
-                os.remove(audio_path)
-
-# Column 2: Form for user input
-with col2:
-    st.subheader("Fill the Form")
-    with st.form(key="user_form"):
-        name = st.text_input("Name", value=info.get("name", ""))
-        phone = st.text_input("Phone Number", value=info.get("phone", ""))
-        email = st.text_input("Email", value=info.get("email", ""))
+# Step 1: Record Audio Section
+st.markdown("### Step 1: Record Your Audio")
+st.write("---")
+if st.button("🎧 Start Recording"):
+    audio = record_audio()
+    if audio is not None:
+        audio_path = save_audio(audio)
         
-        submit_button = st.form_submit_button(label="Submit")
+        # Display the audio file player after recording
+        st.audio(audio_path, format="audio/wav")
         
-        if submit_button:
-            if name and phone and email:
-                st.success(f"Form submitted successfully!\n\nName: {name}\nPhone: {phone}\nEmail: {email}")
-            else:
-                st.error("Please fill out all the fields before submitting.")
+        # Transcribe the audio
+        transcription = transcribe_audio(audio_path)
+        st.subheader("Transcription:")
+        st.write(transcription)
+
+        # Extract name, phone, and email from the transcription
+        info = extract_info(transcription)
+
+        # Save info in session state for persistence across reruns
+        st.session_state['info'] = info
+        
+        # Delete the audio file to save space
+        if os.path.exists(audio_path):
+            os.remove(audio_path)
+
+# Step 2: Form Submission Section
+st.write("---")
+st.markdown("### Step 2: Review and Submit the Form")
+
+# Create a form with fields pre-filled from the transcribed info
+with st.form(key="user_form"):
+    name = st.text_input("🧑 Name", value=info.get("name", ""), placeholder="Enter your name")
+    phone = st.text_input("📞 Phone Number", value=info.get("phone", ""), placeholder="Enter your phone number")
+    email = st.text_input("✉️ Email", value=info.get("email", ""), placeholder="Enter your email")
+
+    submit_button = st.form_submit_button(label="✅ Submit Form")
+
+    if submit_button:
+        if name and phone and email:
+            st.success(f"Form submitted successfully!\n\n**Name**: {name}\n**Phone**: {phone}\n**Email**: {email}")
+        else:
+            st.error("Please fill out all fields before submitting the form.")
 
 # Footer for help or support information
 st.write("---")
-st.write("If you need help with the form submission, please contact support.")
+st.markdown("💡 If you need help with the form submission, please contact our support team.")
