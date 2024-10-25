@@ -1,102 +1,29 @@
-# Voice-Based Form Submission Application
+# Voice-Based Form Submission 🎤
 
-## Overview
-
-This project implements a voice-based form submission application using Python and Streamlit. Users can provide their information by speaking, and the app recognizes the speech and displays the input in real-time. The application also supports translation of the "Tell Me About Yourself" field into several Indian languages.
+This is a voice-based form submission app built using Streamlit. Users can record their voice, which is then transcribed into text, and the extracted information is used to automatically fill in the form fields. The app allows you to record your name, phone number, and email address.
 
 ## Features
+- **Record Audio**: Record audio for 10 seconds via your microphone.
+- **Automatic Transcription**: Converts the recorded audio to text using Google Speech Recognition API.
+- **Information Extraction**: Extracts name, phone number, and email from the transcription.
+- **Form Submission**: Fills out a form based on the transcribed data.
+- **Customizable Styling**: Styled using a custom `style.css` file.
 
-- **Voice Recognition:** Users can record their responses using a microphone.
-- **Real-time Display:** Recognized text is displayed immediately in the respective fields.
-- **Translation:** Users can translate their response to the "Tell Me About Yourself" field into four main Indian languages: Kannada, Tamil, Telugu, and Malayalam.
-- **Responsive Design:** The application is designed to be user-friendly and responsive.
+## Prerequisites
+- **Python 3.8+**
+- **Virtual Environment** (Optional, but recommended)
 
-## Technologies Used
+## Installation Steps
 
-- **Python 3.x**
-- **Streamlit:** A library to create interactive web applications.
-- **SpeechRecognition:** A library for recognizing speech.
-- **Googletrans:** A library for translating text.
-  
-## Requirements
-
-- Python 3.x
-- Required packages can be installed using `pip`.
-
-
-### Additional Dependencies
-
-- **PyAudio:** For microphone access.
-
-
-## Installation
-
-1. **Clone this repository to your local machine:**
+1. **Clone the Repository**
    ```bash
-   git clone https://github.com/Heisenberg208/speech-to-text.git
-   ```
-
-2. **Navigate to the project directory:**
-   ```bash
-   cd <project-directory>
-   ```
-
-3. **Install the required packages:**
-   ```bash
-   pip install streamlit SpeechRecognition googletrans==4.0.0-rc1 pyaudio setuptools
-   ```
-
-## Usage
-
-1. **Run the application:**
-   ```bash
-   streamlit run main.py
-   ```
-
-2. **Open the provided local URL in your web browser.**
-
-3. **Use the buttons to record your responses for each field, and submit the form once you're ready.**
-
-## CSS Styling
-
-The application uses a custom CSS file named `style.css` for styling. This file controls the appearance of various components, including the form layout and buttons.
-
-### Custom CSS Highlights
-
-- **Header Styles:** Custom styles for headers and subheaders to enhance visual appeal.
-- **Form Container:** Styles for the form container, including padding, border-radius, and background color.
-- **Button Styles:** Custom styles for buttons, including hover effects and background color changes.
-
-## Code Structure
-
-- **`main.py:`** Contains the main logic for the application, including voice recognition, form submission, and translation features.
-- **`style.css`:** Contains custom styles for the application, improving user experience.
-
-## Limitations
-
-- The application currently only supports the five specified Indian languages for translation.
-- The speech recognition feature may vary in accuracy based on the quality of the microphone and background noise.
-
-## Contributing
-
-Contributions are welcome! If you have suggestions or improvements, feel free to open an issue or submit a pull request.
-
-## License
-
-This project is licensed under the MIT License.
-
-## Acknowledgments
-
-- [Streamlit Documentation](https://docs.streamlit.io/)
-- [SpeechRecognition Library](https://pypi.org/project/SpeechRecognition/)
-- [Googletrans Documentation](https://pypi.org/project/googletrans/)
-
-## Contact
-
-For any questions or feedback, feel free to reach out via:
-
-- Email: [poornachandra308@gmail.com](mailto:poornachandra308@gmail.com)
-- LinkedIn: [Poornachandra A N](https://www.linkedin.com/in/poornachandra-a-n-602aa1233/)
-
-```
-
+   git clone https://github.com/your-repo/voice-based-form-submission.git
+   cd voice-based-form-submission
+2. **Create a Virtual environment**
+   python -m venv venv
+   source venv/bin/activate   
+   # On Windows, use `venv\Scripts\activate`
+3.**instal dependencies**
+   pip install -r requirements.txt
+4.**Run the app**
+   streamlit run app.py

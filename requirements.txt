@@ -1,0 +1,4 @@
+streamlit==1.25.0
+sounddevice==0.4.6
+SpeechRecognition==3.9.0
+soundfile==0.12.1
