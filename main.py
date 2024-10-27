@@ -6,6 +6,14 @@ import os
 import speech_recognition as sr
 import soundfile as sf
 
+# Load custom CSS
+def load_css(file_name):
+    with open(file_name) as f:
+        st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
+
+# Load the CSS at the start of the app
+load_css('style.css')
+
 recognizer = sr.Recognizer()
 
 def record_audio(duration=10, sample_rate=16000):
@@ -38,7 +46,7 @@ def transcribe_audio(audio_path):
 def extract_info(text):
     name_pattern = r"(?i)my name is (\w+)"
     phone_pattern = r"(?i)my phone (?:number|no) is ([\d\s]+)"
-    email_pattern = r"(?i)my email (?:address|id) is (.+)"
+    email_pattern = r"(?i)my email (?:address|id) is ([\w\.-]+)\.(com|in|org|net|edu|gov|[a-z]{2,3})"
 
     name = re.search(name_pattern, text)
     phone = re.search(phone_pattern, text)
@@ -46,7 +54,7 @@ def extract_info(text):
     phone_number = phone_number if re.fullmatch(r"\d{10}", phone_number) else ""
 
     email = re.search(email_pattern, text)
-    email_value = email.group(1).strip() if email else ""
+    email_value = f"{email.group(1)}.{email.group(2)}" if email else ""
 
     return {
         "name": name.group(1) if name else "",
@@ -106,5 +114,7 @@ with st.form(key="user_form"):
             st.success(f"Form submitted successfully!\n\n**Name**: {name}\n**Phone**: {phone}\n**Email**: {email}")
         else:
             st.error("Please fill out all fields before submitting the form.")
+
 st.write("---")
 st.markdown("")
+
