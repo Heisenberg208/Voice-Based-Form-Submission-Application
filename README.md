@@ -19,12 +19,19 @@ This is a voice-based form submission app built using Streamlit. Users can recor
    ```bash
    git clone https://github.com/your-repo/voice-based-form-submission.git
    cd voice-based-form-submission
+   '''
 2. **Create a Virtual environment**
+   '''bash
    python -m venv venv
    source venv/bin/activate   
    #On Windows, use 
    `venv\Scripts\activate`
+   '''
 3.**instal dependencies**
+   '''bash
    pip install -r requirements.txt
+   '''
 4.**Run the app**
+   ...bash
    streamlit run main.py
+   ,,,
