@@ -26,6 +26,7 @@ This is a voice-based form submission app built using Streamlit. Users can recor
 2. **Create a Virtual Environment**
    ```bash
    python -m venv venv
+   #On ubuntu,use
    source venv/bin/activate   
    # On Windows, use:
    venv\Scripts\activate
