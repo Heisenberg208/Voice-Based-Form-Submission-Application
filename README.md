@@ -22,8 +22,9 @@ This is a voice-based form submission app built using Streamlit. Users can recor
 2. **Create a Virtual environment**
    python -m venv venv
    source venv/bin/activate   
-   # On Windows, use `venv\Scripts\activate`
+   # On Windows, use 
+   `venv\Scripts\activate`
 3.**instal dependencies**
    pip install -r requirements.txt
 4.**Run the app**
-   streamlit run app.py
+   streamlit run main.py

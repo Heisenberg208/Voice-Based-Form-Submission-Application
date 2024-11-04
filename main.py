@@ -11,9 +11,9 @@ def load_css(file_name):
     with open(file_name) as f:
         st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
-# Load the CSS at the start of the app
+
 load_css('style.css')
-def record_audio(duration=15, sample_rate=16000):
+def record_audio(duration=10, sample_rate=16000):
     st.info(f"Recording audio for {duration} seconds...")
     try:
         audio = sd.rec(int(duration * sample_rate), samplerate=sample_rate, channels=1)
@@ -43,7 +43,7 @@ def transcribe_audio(audio_path):
         return ""
 
 def extract_info(text):
-    name_pattern = r"(?i)my name is (\w+)"
+    name_pattern = r"(?i)my name(?: is)? (\w+)"
     phone_pattern = r"(?i)my phone (?:number|no) is ([\d\s]+)"
     email_pattern = r"(?i)my email (?:address|id) is (.+)"
 
@@ -64,11 +64,11 @@ def extract_info(text):
         "email": email_value
     }
 
-# Set the title and intro
+
 st.title("🎙️ Voice-based Form Submission")
 st.write("Record your voice to automatically fill in the form below. 🎤")
 
-# Step 0: How to Use
+
 with st.expander("ℹ️ How to Use", expanded=True):
     st.markdown("""
     ### Step-by-Step Guide:
@@ -87,10 +87,10 @@ with st.expander("ℹ️ How to Use", expanded=True):
     - The order of speaking should be Name,Phone number and E-mail
     """)
 
-# Initialize the info variable with default empty values
+
 info = st.session_state.get('info', {"name": "", "phone": "", "email": ""})
 
-# Step 1: Record Audio Section
+
 st.markdown("### Step 1: Record Your Audio")
 st.write("---")
 if st.button("🎧 Start Recording"):
@@ -98,29 +98,29 @@ if st.button("🎧 Start Recording"):
     if audio is not None:
         audio_path = save_audio(audio)
         
-        # Display the audio file player after recording
+        
         st.audio(audio_path, format="audio/wav")
         
-        # Transcribe the audio
+        
         transcription = transcribe_audio(audio_path)
         st.subheader("Transcription:")
         st.write(transcription)
 
-        # Extract name, phone, and email from the transcription
+        
         info = extract_info(transcription)
 
-        # Save info in session state for persistence across reruns
+        
         st.session_state['info'] = info
         
-        # Delete the audio file to save space
+       
         if os.path.exists(audio_path):
             os.remove(audio_path)
 
-# Step 2: Form Submission Section
+
 st.write("---")
 st.markdown("### Step 2: Review and Submit the Form")
 
-# Create a form with fields pre-filled from the transcribed info
+
 with st.form(key="user_form"):
     name = st.text_input("🧑 Name", value=info.get("name", ""), placeholder="Enter your name")
     phone = st.text_input("📞 Phone Number", value=info.get("phone", ""), placeholder="Enter your phone number")
@@ -134,6 +134,5 @@ with st.form(key="user_form"):
         else:
             st.error("Please fill out all fields before submitting the form.")
 
-# Footer for help or support information
 st.write("---")
 st.markdown("💡 If you need help with the form submission, please contact our support team.")
