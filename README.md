@@ -1,3 +1,5 @@
+
+
 # Voice-Based Form Submission 🎤
 
 This is a voice-based form submission app built using Streamlit. Users can record their voice, which is then transcribed into text, and the extracted information is used to automatically fill in the form fields. The app allows you to record your name, phone number, and email address.
@@ -19,19 +21,28 @@ This is a voice-based form submission app built using Streamlit. Users can recor
    ```bash
    git clone https://github.com/your-repo/voice-based-form-submission.git
    cd voice-based-form-submission
-   '''
-2. **Create a Virtual environment**
-   '''bash
+   ```
+
+2. **Create a Virtual Environment**
+   ```bash
    python -m venv venv
    source venv/bin/activate   
-   #On Windows, use 
-   `venv\Scripts\activate`
-   '''
-3.**instal dependencies**
-   '''bash
+   # On Windows, use:
+   venv\Scripts\activate
+   ```
+
+3. **Install Dependencies**
+   ```bash
    pip install -r requirements.txt
-   '''
-4.**Run the app**
-   ...bash
+   ```
+
+4. **Run the App**
+   ```bash
    streamlit run main.py
-   ,,,
+   ```
+
+## Usage
+1. Click **"Start Recording"** and speak your name, phone number, and email.
+2. Review the transcribed information and edit if needed.
+3. Click **"Submit Form"** to complete the submission.
+
